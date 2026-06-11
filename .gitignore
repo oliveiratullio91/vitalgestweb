@@ -1,0 +1,6 @@
+.vscode/
+prints_erros/
+*.log
+*.tmp
+Thumbs.db
+.DS_Store

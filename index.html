@@ -1,0 +1,2594 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doe Sangue, Salve Vidas</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo h2 {
+            color: #dc2626;
+            font-weight: 700;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #dc2626;
+        }
+
+        /* Auth Buttons */
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .user-menu {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #333;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            align-items: center;
+            min-height: 100vh;
+            padding: 100px 2rem 2rem;
+            background: linear-gradient(135deg, #fef2f2 0%, #fff 100%);
+        }
+
+        .hero-content {
+            flex: 1;
+            max-width: 600px;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero-content h1 span {
+            color: #dc2626;
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn-primary {
+            background: #dc2626;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: #b91c1c;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #dc2626;
+            border: 2px solid #dc2626;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background: #dc2626;
+            color: white;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: #dc2626;
+            border: 2px solid #dc2626;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-outline:hover {
+            background: #dc2626;
+            color: white;
+        }
+
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .blood-drop {
+            font-size: 12rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        /* Stats Section */
+        .stats {
+            background: #dc2626;
+            color: white;
+            padding: 4rem 0;
+        }
+
+        .stats .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        /* About Section */
+        .about {
+            padding: 6rem 0;
+            background: #f8fafc;
+        }
+
+        .about h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #1e293b;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .about-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .about-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .about-card .icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .about-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #1e293b;
+        }
+
+        /* Requirements Section */
+        .requirements {
+            padding: 6rem 0;
+        }
+
+        .requirements-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .requirements-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #1e293b;
+        }
+
+        .requirements-list {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .requirements-list li {
+            padding: 0.8rem 0;
+            font-size: 1.1rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .requirements-image {
+            display: flex;
+            justify-content: center;
+        }
+
+        .blood-bag {
+            font-size: 10rem;
+            color: #dc2626;
+        }
+
+        /* Locations Section */
+        .locations {
+            padding: 6rem 0;
+            background: #f8fafc;
+        }
+
+        .locations h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #1e293b;
+        }
+
+        .locations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .location-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .location-card h3 {
+            color: #dc2626;
+            margin-bottom: 1rem;
+        }
+
+        .location-card p {
+            margin-bottom: 0.5rem;
+            color: #666;
+        }
+
+        /* CTA Section */
+        .cta {
+            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+            color: white;
+            padding: 5rem 0;
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 6rem 0;
+            background: #f8fafc;
+        }
+
+        .contact h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #1e293b;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info h3 {
+            color: #dc2626;
+            margin: 1.5rem 0 1rem;
+        }
+
+        .contact-info h3:first-child {
+            margin-top: 0;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .social-btn {
+            background: #dc2626;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .social-btn:hover {
+            background: #b91c1c;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .contact-form h3 {
+            margin-bottom: 1.5rem;
+            color: #1e293b;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            margin-bottom: 1rem;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: #dc2626;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1e293b;
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3,
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            color: #f8fafc;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #334155;
+            color: #94a3b8;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+            animation: modalSlideIn 0.3s ease;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .close-modal {
+            position: absolute;
+            right: 1rem;
+            top: 1rem;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #666;
+            line-height: 1;
+        }
+
+        .close-modal:hover {
+            color: #dc2626;
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #dc2626;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .checkbox-group input {
+            width: auto;
+            margin-top: 0.25rem;
+        }
+
+        .checkbox-group label {
+            font-weight: normal;
+            margin-bottom: 0;
+        }
+
+        /* Quiz Styles */
+        .quiz-progress {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: #666;
+        }
+
+        .quiz-question {
+            margin-bottom: 1.5rem;
+        }
+
+        .quiz-question h3 {
+            margin-bottom: 1rem;
+            color: #1e293b;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .quiz-option {
+            padding: 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .quiz-option:hover {
+            border-color: #dc2626;
+            background: #fef2f2;
+        }
+
+        .quiz-option.selected {
+            border-color: #dc2626;
+            background: #fef2f2;
+            color: #dc2626;
+        }
+
+        .quiz-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+
+        /* Results Styles */
+        .result-success {
+            text-align: center;
+            color: #15803d;
+        }
+
+        .result-error {
+            text-align: center;
+            color: #dc2626;
+        }
+
+        .result-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .result-success h3,
+        .result-error h3 {
+            margin-bottom: 1rem;
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #dc2626;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            vertical-align: middle;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Success Message */
+        .success-message {
+            background: #dcfce7;
+            color: #15803d;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            text-align: center;
+            border: 1px solid #bbf7d0;
+        }
+
+        /* Auth System Styles */
+        .auth-form .auth-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 1rem 0;
+        }
+
+        .forgot-password {
+            color: #dc2626;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+
+        .auth-switch {
+            text-align: center;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .auth-switch a {
+            color: #dc2626;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .auth-switch a:hover {
+            text-decoration: underline;
+        }
+
+        .auth-error {
+            background: #fef2f2;
+            color: #dc2626;
+            padding: 0.75rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border: 1px solid #fecaca;
+        }
+
+        /* User Dashboard Styles */
+        .user-dashboard {
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .dashboard-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .dashboard-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .stat-icon {
+            font-size: 2rem;
+        }
+
+        .stat-info h3 {
+            font-size: 2rem;
+            color: #dc2626;
+            margin: 0;
+        }
+
+        .stat-info p {
+            margin: 0;
+            color: #666;
+        }
+
+        .dashboard-sections {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .dashboard-section {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .dashboard-section h3 {
+            margin-bottom: 1rem;
+            color: #1e293b;
+        }
+
+        .appointment-card {
+            background: #f0f9ff;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid #0369a1;
+        }
+
+        .user-info p {
+            margin: 0.5rem 0;
+        }
+
+        .donations-history {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .donation-item {
+            background: #f8fafc;
+            padding: 0.75rem;
+            border-radius: 6px;
+            border-left: 3px solid #dc2626;
+        }
+
+        .dashboard-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            /* Mobile Navigation */
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                padding: 2rem;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+                transform: translateY(-100%);
+                opacity: 0;
+                transition: all 0.3s ease;
+            }
+            
+            .nav-links.active {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            
+            .nav-links li {
+                margin: 1rem 0;
+            }
+            
+            .hamburger {
+                display: flex;
+            }
+            
+            .hamburger.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+            
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+            
+            .hamburger.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(7px, -6px);
+            }
+            
+            /* Auth Buttons Mobile */
+            .auth-buttons {
+                gap: 0.5rem;
+            }
+            
+            .auth-buttons .btn-outline,
+            .auth-buttons .btn-primary {
+                padding: 8px 12px;
+                font-size: 0.8rem;
+            }
+            
+            /* Hero Section */
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding-top: 120px;
+            }
+            
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-buttons {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            .blood-drop {
+                font-size: 8rem;
+                margin-top: 2rem;
+            }
+            
+            /* Requirements Section */
+            .requirements-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            /* Stats Section */
+            .stats .container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            /* Contact Section */
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            /* Modal */
+            .modal-content {
+                margin: 10% auto;
+                width: 95%;
+                padding: 1.5rem;
+            }
+            
+            /* Location Cards */
+            .location-card .btn-primary,
+            .location-card .btn-outline {
+                width: 100%;
+                margin: 0.25rem 0;
+            }
+            
+            .quiz-navigation {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .quiz-navigation button {
+                width: 100%;
+            }
+            
+            /* Dashboard Mobile */
+            .dashboard-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .dashboard-actions {
+                flex-direction: column;
+            }
+            
+            .user-menu {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 1.8rem;
+            }
+            
+            .stats .container {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-grid,
+            .locations-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+            }
+            
+            .btn-primary,
+            .btn-secondary {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .navbar {
+                padding: 1rem;
+            }
+            
+            .container {
+                padding: 0 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Modal Structure -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div id="modal-body">
+                <!-- Conteúdo dinâmico do modal -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="logo">
+                <h2>🩸 DoeSangue</h2>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Início</a></li>
+                <li><a href="#about">Por que Doar?</a></li>
+                <li><a href="#requirements">Requisitos</a></li>
+                <li><a href="#locations">Onde Doar</a></li>
+                <li><a href="#contact">Contato</a></li>
+            </ul>
+            
+            <!-- BOTÕES DE LOGIN/CADASTRO -->
+            <div class="auth-buttons">
+                <button class="btn-outline" onclick="authSystem.showAuthModal(true)">Entrar</button>
+                <button class="btn-primary" onclick="authSystem.showAuthModal(false)">Cadastrar</button>
+            </div>
+            
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Uma doação pode salvar <span>até 4 vidas</span></h1>
+            <p>Seja um herói anônimo. Sua doação é a esperança de quem mais precisa.</p>
+            <div class="hero-buttons">
+                <button class="btn-primary" onclick="showSchedulingModal()">Agendar Doação</button>
+                <button class="btn-secondary" onclick="showInfoModal()">Saiba Mais</button>
+            </div>
+        </div>
+        <div class="hero-image">
+            <div class="blood-drop">🩸</div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="stat-item">
+                <h3>42%</h3>
+                <p>da população é elegível para doar</p>
+            </div>
+            <div class="stat-item">
+                <h3>1.6%</h3>
+                <p>realmente doa sangue</p>
+            </div>
+            <div class="stat-item">
+                <h3>4</h3>
+                <p>vidas salvas por doação</p>
+            </div>
+            <div class="stat-item">
+                <h3>15min</h3>
+                <p>tempo médio da doação</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2>Por Que Doar Sangue?</h2>
+            <div class="about-grid">
+                <div class="about-card">
+                    <div class="icon">❤️</div>
+                    <h3>Salva Vidas</h3>
+                    <p>Pacientes em cirurgias, tratamentos contra o câncer e emergências dependem de doações.</p>
+                </div>
+                <div class="about-card">
+                    <div class="icon">🔄</div>
+                    <h3>Renovação Celular</h3>
+                    <p>Seu corpo repõe o sangue doado em até 24 horas. É seguro e benéfico.</p>
+                </div>
+                <div class="about-card">
+                    <div class="icon">🏥</div>
+                    <h3>Estoque Vital</h3>
+                    <p>Mantém os bancos de sangue abastecidos para emergências e tratamentos.</p>
+                </div>
+                <div class="about-card">
+                    <div class="icon">👨‍👩‍👧‍👦</div>
+                    <h3>Solidariedade</h3>
+                    <p>É um ato de amor ao próximo que não custa nada e significa tudo.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Requirements Section -->
+    <section id="requirements" class="requirements">
+        <div class="container">
+            <div class="requirements-content">
+                <div class="requirements-text">
+                    <h2>Requisitos para Doação</h2>
+                    <ul class="requirements-list">
+                        <li>✅ Ter entre 16 e 69 anos</li>
+                        <li>✅ Pesar mais de 50kg</li>
+                        <li>✅ Estar em boas condições de saúde</li>
+                        <li>✅ Documento com foto oficial</li>
+                        <li>✅ Não estar em jejum</li>
+                        <li>✅ Ter dormido bem na noite anterior</li>
+                    </ul>
+                    <button class="btn-primary" onclick="startEligibilityQuiz()">Verificar Minha Elegibilidade</button>
+                </div>
+                <div class="requirements-image">
+                    <div class="blood-bag">💉</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Locations Section -->
+    <section id="locations" class="locations">
+        <div class="container">
+            <h2>Onde Doar</h2>
+            <div class="locations-grid">
+                <div class="location-card">
+                    <h3>Hemocentro Recife</h3>
+                    <p>📍 Rua R. Joaquim Nabuco, 171</p>
+                    <p>🕒 Seg-Sex: 8h-17h</p>
+                    <button class="btn-outline" onclick="showMapModal('Hemocentro Recife')">Ver no Mapa</button>
+                    <button class="btn-primary" onclick="appState.selectedLocation='Hemocentro Recife'; showSchedulingModal();">Agendar Aqui</button>
+                </div>
+                <div class="location-card">
+                    <h3>Hospital das Clínicas</h3>
+                    <p>📍 Av. Prof. Moraes Rego, 1235</p>
+                    <p>🕒 Ter-Sáb: 7h-16h</p>
+                    <button class="btn-outline" onclick="showMapModal('Hospital das Clínicas')">Ver no Mapa</button>
+                    <button class="btn-primary" onclick="appState.selectedLocation='Hospital das Clínicas'; showSchedulingModal();">Agendar Aqui</button>
+                </div>
+                <div class="location-card">
+                    <h3>Hemorio</h3>
+                    <p>📍 Rua Dom Bôsco, 723</p>
+                    <p>🕒 Seg-Sex: 7h-18h</p>
+                    <button class="btn-outline" onclick="showMapModal('Hemorio')">Ver no Mapa</button>
+                    <button class="btn-primary" onclick="appState.selectedLocation='Hemorio'; showSchedulingModal();">Agendar Aqui</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>Pronto para ser um herói?</h2>
+            <p>Agende sua doação agora e faça a diferença na vida de alguém.</p>
+            <button class="btn-primary" onclick="showSchedulingModal()">Agendar Doação Online</button>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>Entre em Contato</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>📞 Telefones Úteis</h3>
+                    <p><strong>Central de Doações:</strong> 0800 642 2020</p>
+                    <p><strong>Emergências:</strong> 192</p>
+                    <p><strong>WhatsApp:</strong> (81) 99999-9999</p>
+                    
+                    <h3>✉️ Email</h3>
+                    <p>contato@doesangue.org</p>
+                    
+                    <h3>🌐 Redes Sociais</h3>
+                    <div class="social-links">
+                        <button class="social-btn">📘 Facebook</button>
+                        <button class="social-btn">📷 Instagram</button>
+                        <button class="social-btn">🐦 Twitter</button>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h3>Envie uma Mensagem</h3>
+                    <form id="contactForm" onsubmit="handleContactSubmit(event)">
+                        <input type="text" id="contactName" placeholder="Seu nome" maxlength="80" pattern="[A-Za-zÀ-ÖØ-öø-ÿ\s]+" title="Use apenas letras e espacos." required>
+                        <input type="email" id="contactEmail" placeholder="Seu email" maxlength="120" pattern="[A-Za-z0-9._-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}" title="Use um email valido sem caracteres especiais fora do padrao." required>
+                        <input type="tel" id="contactPhone" placeholder="Seu celular com DDD" maxlength="11" pattern="[0-9]{2}9[0-9]{8}" title="Use celular com DDD, iniciando com 9. Exemplo: 81999999999.">
+                        <textarea id="contactMessage" placeholder="Sua mensagem" rows="5" minlength="10" maxlength="500" required></textarea>
+                        <button type="submit" class="btn-primary">Enviar Mensagem</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>🩸 DoeSangue</h3>
+                    <p>Conectando doadores a quem precisa.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Links Rápidos</h4>
+                    <ul>
+                        <li><a href="#home">Início</a></li>
+                        <li><a href="#about">Por que Doar?</a></li>
+                        <li><a href="#requirements">Requisitos</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contato</h4>
+                    <p>📞 0800 642 2020</p>
+                    <p>✉️ contato@doesangue.org</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 DoeSangue. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Sistema de Autenticação
+        // INICIO DA CORRECAO - validacao do cadastro
+        const AUTH_FIELD_LIMITS = {
+            name: 80,
+            email: 120,
+            password: 32
+        };
+        const AUTH_NAME_PATTERN = /^[A-Za-zÀ-ÖØ-öø-ÿ]+(?:\s+[A-Za-zÀ-ÖØ-öø-ÿ]+)+$/;
+        const AUTH_EMAIL_PATTERN = /^[A-Za-z0-9._-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+        // FIM DA CORRECAO - validacao do cadastro
+
+        // INICIO DA CORRECAO - integracao segura com Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyBjdkZ7bqo9yXz24XWxiyhCM3EFl0mDHLw",
+            authDomain: "newvitalgest01.firebaseapp.com",
+            databaseURL: "https://newvitalgest01-default-rtdb.firebaseio.com",
+            projectId: "newvitalgest01",
+            storageBucket: "newvitalgest01.firebasestorage.app",
+            messagingSenderId: "197185794471",
+            appId: "1:197185794471:web:6807d49c4b72c873e74682",
+            measurementId: "G-5PEKDMJZ15"
+        };
+
+        const firebaseState = {
+            configured: false
+        };
+
+        function isFirebaseConfigured() {
+            return Object.values(firebaseConfig).every(value => value && !value.includes('COLE_'));
+        }
+
+        const firebaseReady = initializeFirebaseServices();
+
+        async function initializeFirebaseServices() {
+            if (!isFirebaseConfigured()) {
+                console.warn('Firebase nao configurado. Informe os dados do firebaseConfig para ativar cadastro seguro.');
+                return firebaseState;
+            }
+
+            const [appModule, authModule, firestoreModule] = await Promise.all([
+                import('https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js'),
+                import('https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js'),
+                import('https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js')
+            ]);
+
+            const app = appModule.initializeApp(firebaseConfig);
+            const auth = authModule.getAuth(app);
+            await authModule.setPersistence(auth, authModule.browserLocalPersistence);
+            const db = firestoreModule.getFirestore(app);
+
+            Object.assign(firebaseState, {
+                configured: true,
+                app,
+                auth,
+                db,
+                createUserWithEmailAndPassword: authModule.createUserWithEmailAndPassword,
+                signInWithEmailAndPassword: authModule.signInWithEmailAndPassword,
+                signOut: authModule.signOut,
+                onAuthStateChanged: authModule.onAuthStateChanged,
+                updateProfile: authModule.updateProfile,
+                sendPasswordResetEmail: authModule.sendPasswordResetEmail,
+                doc: firestoreModule.doc,
+                getDoc: firestoreModule.getDoc,
+                setDoc: firestoreModule.setDoc,
+                updateDoc: firestoreModule.updateDoc,
+                serverTimestamp: firestoreModule.serverTimestamp
+            });
+
+            return firebaseState;
+        }
+        // FIM DA CORRECAO - integracao segura com Firebase
+
+        const authSystem = {
+            currentUser: null,
+
+            async init() {
+                await this.checkAuthState();
+                this.initializeMobileNav();
+            },
+
+            async checkAuthState() {
+                const services = await firebaseReady;
+
+                localStorage.removeItem('users');
+                localStorage.removeItem('currentUser');
+
+                if (!services.configured) {
+                    this.currentUser = null;
+                    this.updateUI();
+                    return;
+                }
+
+                services.onAuthStateChanged(services.auth, async (firebaseUser) => {
+                    if (firebaseUser) {
+                        this.currentUser = await this.buildUserProfile(firebaseUser);
+                    } else {
+                        this.currentUser = null;
+                    }
+
+                    this.updateUI();
+                });
+            },
+
+            updateUI() {
+                const authButtons = document.querySelector('.auth-buttons');
+                if (!authButtons) return;
+                
+                if (this.currentUser) {
+                    authButtons.innerHTML = `
+                        <div class="user-menu">
+                            <button class="btn-outline" onclick="authSystem.showUserDashboard()">
+                                👋 Olá, ${this.currentUser.name.split(' ')[0]}
+                            </button>
+                            <button class="btn-secondary" onclick="authSystem.logout()">Sair</button>
+                        </div>
+                    `;
+                } else {
+                    authButtons.innerHTML = `
+                        <button class="btn-outline" onclick="authSystem.showAuthModal(true)">Entrar</button>
+                        <button class="btn-primary" onclick="authSystem.showAuthModal(false)">Cadastrar</button>
+                    `;
+                }
+            },
+
+            showAuthModal(isLogin = true) {
+                const title = isLogin ? 'Entrar na Sua Conta' : 'Criar Nova Conta';
+                
+                const content = `
+                    <h2>${title}</h2>
+                    <form onsubmit="event.preventDefault(); authSystem.handleAuthSubmit(event, ${isLogin})" class="auth-form">
+                        ${!isLogin ? `
+                            <div class="form-group">
+                                <label>Nome completo:</label>
+                                <input type="text" id="userName" placeholder="Seu nome completo" maxlength="80" pattern="[A-Za-zÀ-ÖØ-öø-ÿ\\s]+" title="Use apenas letras e espacos." required>
+                            </div>
+                        ` : ''}
+                        
+                        <div class="form-group">
+                            <label>Email:</label>
+                            <input type="email" id="userEmail" placeholder="seu@email.com" maxlength="120" pattern="[A-Za-z0-9._-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}" title="Use um email valido sem caracteres especiais fora do padrao." required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Senha:</label>
+                            <input type="password" id="userPassword" placeholder="Sua senha" required minlength="6" maxlength="32">
+                        </div>
+                        
+                        ${!isLogin ? `
+                            <div class="form-group">
+                                <label>Confirmar senha:</label>
+                                <input type="password" id="userConfirmPassword" placeholder="Confirme sua senha" required minlength="6" maxlength="32">
+                            </div>
+                        ` : ''}
+                        
+                        <div class="auth-options">
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="rememberMe">
+                                <label for="rememberMe">Lembrar de mim</label>
+                            </div>
+                            
+                            ${isLogin ? `
+                                <a href="#" class="forgot-password" onclick="event.preventDefault(); authSystem.handlePasswordReset()">Esqueci minha senha</a>
+                            ` : ''}
+                        </div>
+                        
+                        <button type="submit" class="btn-primary" style="width: 100%; margin-top: 1rem;">
+                            ${isLogin ? 'Entrar' : 'Criar Conta'}
+                        </button>
+                        
+                        <div class="auth-switch">
+                            ${isLogin ? 
+                                'Não tem conta? <a href="#" onclick="authSystem.showAuthModal(false)">Cadastre-se</a>' : 
+                                'Já tem conta? <a href="#" onclick="authSystem.showAuthModal(true)">Faça login</a>'
+                            }
+                        </div>
+                    </form>
+                `;
+                
+                showModal(content);
+                this.setupAuthFieldRestrictions();
+            },
+
+            // INICIO DA CORRECAO - validacao do cadastro
+            setupAuthFieldRestrictions() {
+                const nameInput = document.getElementById('userName');
+                const emailInput = document.getElementById('userEmail');
+                const passwordInput = document.getElementById('userPassword');
+                const confirmInput = document.getElementById('userConfirmPassword');
+
+                if (nameInput) {
+                    nameInput.addEventListener('input', () => {
+                        nameInput.value = nameInput.value
+                            .replace(/[^A-Za-zÀ-ÖØ-öø-ÿ\s]/g, '')
+                            .replace(/\s{2,}/g, ' ')
+                            .slice(0, AUTH_FIELD_LIMITS.name);
+                    });
+                }
+
+                if (emailInput) {
+                    emailInput.addEventListener('input', () => {
+                        let sanitizedEmail = emailInput.value
+                            .replace(/[^A-Za-z0-9@._-]/g, '')
+                            .slice(0, AUTH_FIELD_LIMITS.email);
+                        const firstAt = sanitizedEmail.indexOf('@');
+
+                        if (firstAt !== -1) {
+                            sanitizedEmail = sanitizedEmail.slice(0, firstAt + 1) + sanitizedEmail.slice(firstAt + 1).replace(/@/g, '');
+                        }
+
+                        emailInput.value = sanitizedEmail;
+                    });
+                }
+
+                if (passwordInput) {
+                    passwordInput.addEventListener('input', () => {
+                        passwordInput.value = passwordInput.value.slice(0, AUTH_FIELD_LIMITS.password);
+                    });
+                }
+
+                if (confirmInput) {
+                    confirmInput.addEventListener('input', () => {
+                        confirmInput.value = confirmInput.value.slice(0, AUTH_FIELD_LIMITS.password);
+                    });
+                }
+            },
+
+            validateRegisterFields(name, email, password, confirmPassword) {
+                if (!AUTH_NAME_PATTERN.test(name)) {
+                    return 'Informe nome e sobrenome usando apenas letras.';
+                }
+
+                if (name.length > AUTH_FIELD_LIMITS.name) {
+                    return 'O nome deve ter no maximo 80 caracteres.';
+                }
+
+                if (!AUTH_EMAIL_PATTERN.test(email)) {
+                    return 'Informe um email valido sem caracteres especiais fora do padrao.';
+                }
+
+                if (email.length > AUTH_FIELD_LIMITS.email) {
+                    return 'O email deve ter no maximo 120 caracteres.';
+                }
+
+                if (password.length < 6 || password.length > AUTH_FIELD_LIMITS.password) {
+                    return 'A senha deve ter entre 6 e 32 caracteres.';
+                }
+
+                if (password !== confirmPassword) {
+                    return 'As senhas nao coincidem!';
+                }
+
+                return '';
+            },
+            // FIM DA CORRECAO - validacao do cadastro
+
+            async handleAuthSubmit(e, isLogin) {
+                const email = document.getElementById('userEmail').value.trim();
+                const password = document.getElementById('userPassword').value;
+                const name = (document.getElementById('userName')?.value || '').trim().replace(/\s{2,}/g, ' ');
+                const confirmPassword = document.getElementById('userConfirmPassword')?.value || '';
+
+                if (!isLogin) {
+                    const validationError = this.validateRegisterFields(name, email, password, confirmPassword);
+
+                    if (validationError) {
+                        this.showAuthError(validationError);
+                        return;
+                    }
+
+                    if (password !== confirmPassword) {
+                        this.showAuthError('As senhas não coincidem!');
+                        return;
+                    }
+                    if (!name) {
+                        this.showAuthError('Por favor, informe seu nome completo!');
+                        return;
+                    }
+                    await this.register(name, email, password);
+                } else {
+                    await this.login(email, password);
+                }
+            },
+
+            // INICIO DA CORRECAO - Firebase Auth substitui localStorage
+            async register(name, email, password) {
+                try {
+                    const services = await this.getFirebaseServices();
+                    const credential = await services.createUserWithEmailAndPassword(services.auth, email, password);
+
+                    await services.updateProfile(credential.user, { displayName: name });
+                    await services.setDoc(services.doc(services.db, 'users', credential.user.uid), {
+                        name,
+                        email,
+                        createdAt: services.serverTimestamp(),
+                        donations: [],
+                        appointments: []
+                    });
+
+                    this.currentUser = await this.buildUserProfile(credential.user);
+                    this.showAuthSuccess('Cadastro realizado com sucesso!');
+                    this.updateUI();
+                } catch (error) {
+                    this.showAuthError(this.getFirebaseErrorMessage(error));
+                }
+            },
+
+            async login(email, password) {
+                try {
+                    const services = await this.getFirebaseServices();
+                    const credential = await services.signInWithEmailAndPassword(services.auth, email, password);
+                    this.currentUser = await this.buildUserProfile(credential.user);
+                    this.showAuthSuccess(`Bem-vindo de volta, ${this.currentUser.name}!`);
+                    this.updateUI();
+                } catch (error) {
+                    this.showAuthError(this.getFirebaseErrorMessage(error));
+                }
+            },
+
+            // INICIO DA CORRECAO - recuperacao de senha pelo Firebase
+            async handlePasswordReset() {
+                const emailInput = document.getElementById('userEmail');
+                const email = (emailInput?.value || '').trim();
+
+                if (!AUTH_EMAIL_PATTERN.test(email)) {
+                    this.showAuthError('Informe o email cadastrado para receber o link de redefinicao.');
+                    emailInput?.focus();
+                    return;
+                }
+
+                try {
+                    const services = await this.getFirebaseServices();
+                    const resetOptions = /^https?:/.test(window.location.origin)
+                        ? { url: window.location.origin, handleCodeInApp: false }
+                        : undefined;
+
+                    await services.sendPasswordResetEmail(services.auth, email, resetOptions);
+                    this.showAuthSuccess('Enviamos um link de redefinicao para seu email.', false);
+                } catch (error) {
+                    this.showAuthError(this.getFirebaseErrorMessage(error));
+                }
+            },
+            // FIM DA CORRECAO - recuperacao de senha pelo Firebase
+
+            async logout() {
+                try {
+                    const services = await this.getFirebaseServices();
+                    await services.signOut(services.auth);
+                    this.currentUser = null;
+                    this.updateUI();
+                    this.showAuthSuccess('Logout realizado com sucesso!');
+                } catch (error) {
+                    this.showAuthError(this.getFirebaseErrorMessage(error));
+                }
+            },
+            // FIM DA CORRECAO - Firebase Auth substitui localStorage
+
+            showAuthError(message) {
+                const existingError = document.querySelector('.auth-error');
+                if (existingError) existingError.remove();
+                
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'auth-error';
+                errorDiv.innerHTML = `❌ ${message}`;
+                
+                const form = document.querySelector('.auth-form');
+                if (form) {
+                    form.insertBefore(errorDiv, form.firstChild);
+                }
+            },
+
+            showAuthSuccess(message, shouldCloseModal = true) {
+                if (shouldCloseModal) {
+                    closeModalFunc();
+                }
+                
+                const successMsg = document.createElement('div');
+                successMsg.className = 'success-message';
+                successMsg.innerHTML = `✅ ${message}`;
+                successMsg.style.cssText = `
+                    position: fixed;
+                    top: 100px;
+                    right: 20px;
+                    z-index: 10000;
+                `;
+                
+                document.body.appendChild(successMsg);
+                
+                setTimeout(() => {
+                    successMsg.remove();
+                }, 3000);
+            },
+
+            async getFirebaseServices() {
+                const services = await firebaseReady;
+
+                if (!services.configured) {
+                    throw { code: 'vitalgest/firebase-not-configured' };
+                }
+
+                return services;
+            },
+
+            getFirebaseErrorMessage(error) {
+                const messages = {
+                    'vitalgest/firebase-not-configured': 'Firebase ainda nao foi configurado. Informe o firebaseConfig do projeto antes de cadastrar usuarios.',
+                    'auth/email-already-in-use': 'Este email ja esta cadastrado no Firebase.',
+                    'auth/invalid-email': 'Informe um email valido.',
+                    'auth/weak-password': 'A senha deve ter pelo menos 6 caracteres.',
+                    'auth/invalid-credential': 'Email ou senha incorretos.',
+                    'auth/user-not-found': 'Usuario nao encontrado.',
+                    'auth/wrong-password': 'Email ou senha incorretos.',
+                    'auth/too-many-requests': 'Muitas tentativas seguidas. Aguarde um pouco e tente novamente.',
+                    'permission-denied': 'Sem permissao para salvar dados. Verifique as regras do Firestore.'
+                };
+
+                return messages[error.code] || 'Nao foi possivel concluir a operacao. Tente novamente.';
+            },
+
+            async buildUserProfile(firebaseUser) {
+                const services = await this.getFirebaseServices();
+                const userRef = services.doc(services.db, 'users', firebaseUser.uid);
+                const snapshot = await services.getDoc(userRef);
+                const userData = snapshot.exists() ? snapshot.data() : {};
+                const createdAt = userData.createdAt?.toDate ? userData.createdAt.toDate().toISOString() : (userData.createdAt || new Date().toISOString());
+                const profile = {
+                    id: firebaseUser.uid,
+                    name: userData.name || firebaseUser.displayName || firebaseUser.email.split('@')[0],
+                    email: firebaseUser.email || userData.email,
+                    createdAt,
+                    donations: Array.isArray(userData.donations) ? userData.donations : [],
+                    appointments: Array.isArray(userData.appointments) ? userData.appointments : []
+                };
+
+                if (!snapshot.exists()) {
+                    await services.setDoc(userRef, {
+                        name: profile.name,
+                        email: profile.email,
+                        createdAt: services.serverTimestamp(),
+                        donations: [],
+                        appointments: []
+                    });
+                }
+
+                return profile;
+            },
+
+            showUserDashboard() {
+                const user = this.currentUser;
+                const totalDonations = user.donations ? user.donations.length : 0;
+                const nextAppointment = user.appointments ? user.appointments.find(apt => new Date(apt.date) > new Date()) : null;
+
+                const content = `
+                    <div class="user-dashboard">
+                        <div class="dashboard-header">
+                            <h2>👋 Bem-vindo, ${user.name}!</h2>
+                            <p>Gerencie suas doações e agendamentos</p>
+                        </div>
+                        
+                        <div class="dashboard-stats">
+                            <div class="stat-card">
+                                <div class="stat-icon">🩸</div>
+                                <div class="stat-info">
+                                    <h3>${totalDonations}</h3>
+                                    <p>Doações Realizadas</p>
+                                </div>
+                            </div>
+                            
+                            <div class="stat-card">
+                                <div class="stat-icon">📅</div>
+                                <div class="stat-info">
+                                    <h3>${nextAppointment ? '1' : '0'}</h3>
+                                    <p>Próximo Agendamento</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="dashboard-sections">
+                            ${nextAppointment ? `
+                                <div class="dashboard-section">
+                                    <h3>📅 Próxima Doação Agendada</h3>
+                                    <div class="appointment-card">
+                                        <p><strong>Local:</strong> ${nextAppointment.location}</p>
+                                        <p><strong>Data:</strong> ${new Date(nextAppointment.date).toLocaleDateString('pt-BR')}</p>
+                                        <p><strong>Horário:</strong> ${nextAppointment.time}</p>
+                                        <button class="btn-outline" onclick="authSystem.cancelAppointment('${nextAppointment.id}')">Cancelar</button>
+                                    </div>
+                                </div>
+                            ` : ''}
+                            
+                            <div class="dashboard-section">
+                                <h3>📋 Meus Dados</h3>
+                                <div class="user-info">
+                                    <p><strong>Nome:</strong> ${user.name}</p>
+                                    <p><strong>Email:</strong> ${user.email}</p>
+                                    <p><strong>Membro desde:</strong> ${new Date(user.createdAt).toLocaleDateString('pt-BR')}</p>
+                                </div>
+                            </div>
+                            
+                            ${totalDonations > 0 ? `
+                                <div class="dashboard-section">
+                                    <h3>🩸 Histórico de Doações</h3>
+                                    <div class="donations-history">
+                                        ${user.donations.map(donation => `
+                                            <div class="donation-item">
+                                                <p><strong>${new Date(donation.date).toLocaleDateString('pt-BR')}</strong> - ${donation.location}</p>
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                </div>
+                            ` : ''}
+                        </div>
+                        
+                        <div class="dashboard-actions">
+                            <button class="btn-primary" onclick="showSchedulingModal()">
+                                Agendar Nova Doação
+                            </button>
+                            <button class="btn-secondary" onclick="closeModalFunc()">
+                                Fechar
+                            </button>
+                        </div>
+                    </div>
+                `;
+                
+                showModal(content);
+            },
+
+            async cancelAppointment(appointmentId) {
+                const user = this.currentUser;
+                user.appointments = user.appointments.filter(apt => apt.id !== appointmentId);
+
+                const services = await this.getFirebaseServices();
+                await services.updateDoc(services.doc(services.db, 'users', user.id), {
+                    appointments: user.appointments
+                });
+
+                this.currentUser = user;
+                
+                this.showUserDashboard();
+                this.showAuthSuccess('Agendamento cancelado com sucesso!', false);
+            },
+
+            async addAppointment(appointmentData) {
+                if (!this.currentUser) return false;
+                
+                const user = this.currentUser;
+                if (!user.appointments) user.appointments = [];
+                
+                const newAppointment = {
+                    id: Date.now().toString(),
+                    ...appointmentData,
+                    createdAt: new Date().toISOString()
+                };
+                
+                user.appointments.push(newAppointment);
+
+                const services = await this.getFirebaseServices();
+                await services.updateDoc(services.doc(services.db, 'users', user.id), {
+                    appointments: user.appointments
+                });
+
+                this.currentUser = user;
+                
+                return true;
+            },
+
+            initializeMobileNav() {
+                const hamburger = document.querySelector('.hamburger');
+                const navLinks = document.querySelector('.nav-links');
+
+                if (hamburger && navLinks) {
+                    hamburger.addEventListener('click', () => {
+                        navLinks.classList.toggle('active');
+                        hamburger.classList.toggle('active');
+                    });
+                }
+
+                // Smooth Scrolling
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        const target = document.querySelector(this.getAttribute('href'));
+                        if (target) {
+                            target.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                            // Close mobile menu if open
+                            if (navLinks) {
+                                navLinks.classList.remove('active');
+                                hamburger.classList.remove('active');
+                            }
+                        }
+                    });
+                });
+            }
+        };
+
+        // Elementos do DOM
+        const modal = document.getElementById('modal');
+        const modalBody = document.getElementById('modal-body');
+        const closeModal = document.querySelector('.close-modal');
+
+        // Dados e estado da aplicação
+        const appState = {
+            currentQuizStep: 0,
+            quizAnswers: [],
+            selectedLocation: null
+        };
+
+        // INICIO DA CORRECAO - expor controladores usados pelos cliques da tela
+        window.authSystem = authSystem;
+        window.appState = appState;
+        // FIM DA CORRECAO - expor controladores usados pelos cliques da tela
+
+        // Quiz de elegibilidade
+        const quizQuestions = [
+            {
+                question: "Qual sua idade?",
+                type: "radio",
+                options: [
+                    { value: "under16", text: "Menos de 16 anos" },
+                    { value: "16-69", text: "Entre 16 e 69 anos" },
+                    { value: "over69", text: "Mais de 69 anos" }
+                ]
+            },
+            {
+                question: "Quanto você pesa?",
+                type: "radio",
+                options: [
+                    { value: "under50", text: "Menos de 50kg" },
+                    { value: "over50", text: "50kg ou mais" }
+                ]
+            },
+            {
+                question: "Como está sua saúde hoje?",
+                type: "radio",
+                options: [
+                    { value: "good", text: "Estou bem, sem doenças" },
+                    { value: "sick", text: "Estou resfriado/doente" },
+                    { value: "chronic", text: "Tenho doença crônica" }
+                ]
+            }
+        ];
+
+        // Sistema de Modal
+        function showModal(content) {
+            modalBody.innerHTML = content;
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModalFunc() {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+            appState.currentQuizStep = 0;
+            appState.quizAnswers = [];
+        }
+
+        // Modal de Agendamento
+        function showSchedulingModal() {
+    if (!authSystem.currentUser) {
+        authSystem.showAuthModal(true);
+        authSystem.showAuthError('Faça login para agendar uma doação!');
+        return;
+    }
+
+    const locationText = appState.selectedLocation ?
+        `<p><strong>Local selecionado:</strong> ${appState.selectedLocation}</p>` :
+        `<div class="form-group">
+            <label for="locationSelect">Escolha o hemocentro:</label>
+            <select id="locationSelect" required>
+                <option value="">Selecione um hemocentro</option>
+                <option value="Hemocentro Recife">Hemocentro Recife</option>
+                <option value="Hospital das Clínicas">Hospital das Clínicas</option>
+                <option value="Hemorio">Hemorio</option>
+            </select>
+        </div>`;
+
+    const content = `
+        <h2>🎯 Agendar Doação</h2>
+        ${locationText}
+        <div class="form-group">
+            <label for="scheduleName">Seu nome completo:</label>
+            <input
+                type="text"
+                id="scheduleName"
+                placeholder="Digite seu nome completo"
+                minlength="3"
+                maxlength="80"
+                autocomplete="name"
+                pattern="[A-Za-zÀ-ÖØ-öø-ÿ\\s]+"
+                title="Informe nome e sobrenome usando apenas letras."
+                required
+            >
+        </div>
+        <div class="form-group">
+            <label for="scheduleCpf">CPF:</label>
+            <input
+                type="text"
+                id="scheduleCpf"
+                placeholder="000.000.000-00"
+                minlength="14"
+                maxlength="14"
+                inputmode="numeric"
+                autocomplete="off"
+                pattern="\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}"
+                title="Informe um CPF no formato 000.000.000-00."
+                required
+            >
+        </div>
+        <div class="form-group">
+            <label for="schedulePhone">Telefone:</label>
+            <input
+                type="tel"
+                id="schedulePhone"
+                placeholder="(81) 99999-9999"
+                minlength="15"
+                maxlength="15"
+                inputmode="numeric"
+                autocomplete="tel"
+                pattern="\\(\\d{2}\\)\\s9\\d{4}-\\d{4}"
+                title="Informe um celular com DDD, iniciando com 9. Exemplo: (81) 99999-9999."
+                required
+            >
+        </div>
+        <div class="form-group">
+            <label for="scheduleDate">Data preferida:</label>
+            <input
+                type="date"
+                id="scheduleDate"
+                min="${getTomorrowDate()}"
+                max="${getMaxScheduleDate()}"
+                required
+            >
+        </div>
+        <div class="form-group">
+            <label for="scheduleTime">Horário preferido:</label>
+            <select id="scheduleTime" required>
+                <option value="">Selecione um horário</option>
+                <option value="08:00">08:00</option>
+                <option value="09:00">09:00</option>
+                <option value="10:00">10:00</option>
+                <option value="11:00">11:00</option>
+                <option value="13:00">13:00</option>
+                <option value="14:00">14:00</option>
+                <option value="15:00">15:00</option>
+            </select>
+        </div>
+        <div class="checkbox-group">
+            <input type="checkbox" id="confirmTerms" required>
+            <label for="confirmTerms">Confirmo que li e aceito os termos de doação</label>
+        </div>
+        <button class="btn-primary" onclick="submitSchedule()" style="width: 100%;">
+            <span id="submitText">Confirmar Agendamento</span>
+            <span id="loadingSpinner" class="loading" style="display: none;"></span>
+        </button>
+    `;
+
+    showModal(content);
+    setupScheduleFieldRestrictions();
+
+    const scheduleName = document.getElementById('scheduleName');
+    if (scheduleName && authSystem.currentUser?.name) {
+        scheduleName.value = sanitizeScheduleName(authSystem.currentUser.name);
+    }
+}
+
+function getTomorrowDate() {
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    return tomorrow.toISOString().split('T')[0];
+}
+
+// INICIO DA CORRECAO - validacao do agendamento
+const SCHEDULE_FIELD_LIMITS = {
+    name: 80,
+    cpf: 14,
+    phone: 15
+};
+
+const SCHEDULE_NAME_PATTERN = /^[A-Za-zÀ-ÖØ-öø-ÿ]+(?:\s+[A-Za-zÀ-ÖØ-öø-ÿ]+)+$/;
+const SCHEDULE_CPF_PATTERN = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/;
+const SCHEDULE_PHONE_PATTERN = /^\(\d{2}\)\s9\d{4}-\d{4}$/;
+
+function getMaxScheduleDate() {
+    const maxDate = new Date();
+    maxDate.setDate(maxDate.getDate() + 90);
+    return maxDate.toISOString().split('T')[0];
+}
+
+function sanitizeScheduleName(value) {
+    return (value || '')
+        .replace(/[^A-Za-zÀ-ÖØ-öø-ÿ\s]/g, '')
+        .replace(/\s{2,}/g, ' ')
+        .trimStart()
+        .slice(0, SCHEDULE_FIELD_LIMITS.name);
+}
+
+function formatCpf(value) {
+    const digits = (value || '').replace(/\D/g, '').slice(0, 11);
+
+    return digits
+        .replace(/^(\d{3})(\d)/, '$1.$2')
+        .replace(/^(\d{3})\.(\d{3})(\d)/, '$1.$2.$3')
+        .replace(/^(\d{3})\.(\d{3})\.(\d{3})(\d)/, '$1.$2.$3-$4');
+}
+
+function formatPhone(value) {
+    const digits = (value || '').replace(/\D/g, '').slice(0, 11);
+
+    if (digits.length <= 2) {
+        return digits ? `(${digits}` : '';
+    }
+
+    if (digits.length <= 10) {
+        return digits
+            .replace(/^(\d{2})(\d)/, '($1) $2')
+            .replace(/^(\(\d{2}\)\s\d{4})(\d)/, '$1-$2');
+    }
+
+    return digits
+        .replace(/^(\d{2})(\d)/, '($1) $2')
+        .replace(/^(\(\d{2}\)\s\d{5})(\d)/, '$1-$2');
+}
+
+function isValidCpf(cpf) {
+    const digits = (cpf || '').replace(/\D/g, '');
+
+    if (digits.length !== 11 || /^(\d)\1{10}$/.test(digits)) {
+        return false;
+    }
+
+    const calculateDigit = (base) => {
+        let sum = 0;
+
+        for (let i = 0; i < base.length; i++) {
+            sum += Number(base[i]) * (base.length + 1 - i);
+        }
+
+        const rest = (sum * 10) % 11;
+        return rest === 10 ? 0 : rest;
+    };
+
+    const digit1 = calculateDigit(digits.slice(0, 9));
+    const digit2 = calculateDigit(digits.slice(0, 10));
+
+    return digit1 === Number(digits[9]) && digit2 === Number(digits[10]);
+}
+
+function setupScheduleFieldRestrictions() {
+    const nameInput = document.getElementById('scheduleName');
+    const cpfInput = document.getElementById('scheduleCpf');
+    const phoneInput = document.getElementById('schedulePhone');
+    const dateInput = document.getElementById('scheduleDate');
+
+    if (nameInput) {
+        nameInput.addEventListener('input', () => {
+            nameInput.value = sanitizeScheduleName(nameInput.value);
+        });
+
+        nameInput.addEventListener('blur', () => {
+            nameInput.value = sanitizeScheduleName(nameInput.value).trim();
+        });
+    }
+
+    if (cpfInput) {
+        cpfInput.addEventListener('input', () => {
+            cpfInput.value = formatCpf(cpfInput.value);
+        });
+    }
+
+    if (phoneInput) {
+        phoneInput.addEventListener('input', () => {
+            phoneInput.value = formatPhone(phoneInput.value);
+        });
+    }
+
+    if (dateInput) {
+        dateInput.min = getTomorrowDate();
+        dateInput.max = getMaxScheduleDate();
+    }
+}
+
+function validateScheduleForm(userName, userCpf, userPhone, scheduleDate, scheduleTime, selectedLocation, confirmTerms) {
+    const normalizedName = sanitizeScheduleName(userName).trim();
+    const normalizedCpf = formatCpf(userCpf);
+    const normalizedPhone = formatPhone(userPhone);
+    const selectedDate = new Date(`${scheduleDate}T00:00:00`);
+    const minimumDate = new Date(`${getTomorrowDate()}T00:00:00`);
+    const maximumDate = new Date(`${getMaxScheduleDate()}T00:00:00`);
+
+    if (!selectedLocation) {
+        return 'Selecione um hemocentro para realizar a doação.';
+    }
+
+    if (!normalizedName || !normalizedCpf || !normalizedPhone || !scheduleDate || !scheduleTime || !confirmTerms) {
+        return 'Por favor, preencha todos os campos obrigatórios.';
+    }
+
+    if (normalizedName.length < 3 || normalizedName.length > SCHEDULE_FIELD_LIMITS.name || !SCHEDULE_NAME_PATTERN.test(normalizedName)) {
+        return 'Informe nome e sobrenome usando apenas letras.';
+    }
+
+    if (!SCHEDULE_CPF_PATTERN.test(normalizedCpf) || !isValidCpf(normalizedCpf)) {
+        return 'Informe um CPF válido no formato 000.000.000-00.';
+    }
+
+    if (!SCHEDULE_PHONE_PATTERN.test(normalizedPhone)) {
+        return 'Informe um celular valido com DDD, iniciando com 9. Exemplo: (81) 99999-9999.';
+    }
+
+    if (Number.isNaN(selectedDate.getTime())) {
+        return 'Informe uma data válida para o agendamento.';
+    }
+
+    if (selectedDate < minimumDate) {
+        return 'Escolha uma data futura para o agendamento.';
+    }
+
+    if (selectedDate > maximumDate) {
+        return 'Escolha uma data dentro dos próximos 90 dias.';
+    }
+
+    return '';
+}
+// FIM DA CORRECAO - validacao do agendamento
+
+async function submitSchedule() {
+    const submitBtn = document.querySelector('#modal .btn-primary');
+    const submitText = document.getElementById('submitText');
+    const loadingSpinner = document.getElementById('loadingSpinner');
+
+    const nameInput = document.getElementById('scheduleName');
+    const cpfInput = document.getElementById('scheduleCpf');
+    const phoneInput = document.getElementById('schedulePhone');
+    const scheduleDateInput = document.getElementById('scheduleDate');
+    const scheduleTimeInput = document.getElementById('scheduleTime');
+    const locationSelect = document.getElementById('locationSelect');
+
+    const userName = sanitizeScheduleName(nameInput?.value || '').trim();
+    const userCpf = formatCpf(cpfInput?.value || '');
+    const userPhone = formatPhone(phoneInput?.value || '');
+    const scheduleDate = scheduleDateInput?.value || '';
+    const scheduleTime = scheduleTimeInput?.value || '';
+    const selectedLocation = appState.selectedLocation || locationSelect?.value || '';
+    const confirmTerms = document.getElementById('confirmTerms')?.checked || false;
+
+    if (nameInput) nameInput.value = userName;
+    if (cpfInput) cpfInput.value = userCpf;
+    if (phoneInput) phoneInput.value = userPhone;
+
+    const validationError = validateScheduleForm(userName, userCpf, userPhone, scheduleDate, scheduleTime, selectedLocation, confirmTerms);
+
+    if (validationError) {
+        alert(validationError);
+        return;
+    }
+
+    if (!authSystem.currentUser) {
+        closeModalFunc();
+        setTimeout(() => {
+            authSystem.showAuthModal(true);
+            authSystem.showAuthError('Faça login para agendar uma doação!');
+        }, 500);
+        return;
+    }
+
+    if (submitText && loadingSpinner && submitBtn) {
+        submitText.style.display = 'none';
+        loadingSpinner.style.display = 'inline-block';
+        submitBtn.disabled = true;
+    }
+
+    const saveAppointment = async () => {
+        const appointmentData = {
+            location: selectedLocation,
+            date: scheduleDate,
+            time: scheduleTime,
+            userName,
+            userCpf,
+            userPhone
+        };
+
+        let success = false;
+
+        try {
+            success = await authSystem.addAppointment(appointmentData);
+        } catch (error) {
+            alert(authSystem.getFirebaseErrorMessage(error));
+        }
+
+        if (success) {
+            const successContent = `
+                <div class="result-success">
+                    <div class="result-icon">✅</div>
+                    <h3>Agendamento Confirmado!</h3>
+                    <p><strong>Protocolo:</strong> #${Math.random().toString(36).substr(2, 9).toUpperCase()}</p>
+                    <p><strong>Data:</strong> ${scheduleDate} às ${scheduleTime}</p>
+                    <p><strong>Local:</strong> ${selectedLocation}</p>
+                    <p><strong>Doador:</strong> ${userName}</p>
+                    <p>Você receberá um email de confirmação. Chegue 15 minutos antes do horário agendado.</p>
+                    <div style="display: flex; gap: 1rem; margin-top: 1rem; flex-wrap: wrap;">
+                        <button class="btn-primary" onclick="authSystem.showUserDashboard()">Ver Meus Agendamentos</button>
+                        <button class="btn-secondary" onclick="closeModalFunc()">Fechar</button>
+                    </div>
+                </div>
+            `;
+            modalBody.innerHTML = successContent;
+        } else {
+            alert('Erro ao salvar agendamento. Tente novamente.');
+            if (submitText && loadingSpinner && submitBtn) {
+                submitText.style.display = 'inline';
+                loadingSpinner.style.display = 'none';
+                submitBtn.disabled = false;
+            }
+        }
+    };
+
+    if (submitText && loadingSpinner && submitBtn) {
+        setTimeout(saveAppointment, 800);
+    } else {
+        saveAppointment();
+    }
+}
+
+
+// Quiz de Elegibilidade
+        function startEligibilityQuiz() {
+            appState.currentQuizStep = 0;
+            appState.quizAnswers = [];
+            showQuizStep(0);
+        }
+
+        function showQuizStep(step) {
+            if (step >= quizQuestions.length) {
+                showQuizResults();
+                return;
+            }
+            
+            const question = quizQuestions[step];
+            let optionsHTML = '';
+            
+            if (question.type === 'radio') {
+                optionsHTML = question.options.map(opt => `
+                    <div class="quiz-option" onclick="selectQuizOption(${step}, '${opt.value}')">
+                        ${opt.text}
+                    </div>
+                `).join('');
+            }
+            
+            const content = `
+                <h2>📋 Verificação de Elegibilidade</h2>
+                <div class="quiz-progress">
+                    <p>Pergunta ${step + 1} de ${quizQuestions.length}</p>
+                </div>
+                <div class="quiz-question">
+                    <h3>${question.question}</h3>
+                    <div class="quiz-options">
+                        ${optionsHTML}
+                    </div>
+                </div>
+                <div class="quiz-navigation">
+                    ${step > 0 ? `<button class="btn-secondary" onclick="showQuizStep(${step - 1})">Voltar</button>` : '<div></div>'}
+                    <button class="btn-primary" onclick="nextQuizStep(${step})">Continuar</button>
+                </div>
+            `;
+            showModal(content);
+        }
+
+        function selectQuizOption(step, value) {
+            const options = document.querySelectorAll('.quiz-option');
+            options.forEach(opt => opt.classList.remove('selected'));
+            event.target.classList.add('selected');
+            
+            appState.quizAnswers[step] = [value];
+        }
+
+        function nextQuizStep(currentStep) {
+            if (!appState.quizAnswers[currentStep] || appState.quizAnswers[currentStep].length === 0) {
+                alert('Por favor, selecione uma opção antes de continuar.');
+                return;
+            }
+            
+            appState.currentQuizStep++;
+            showQuizStep(appState.currentQuizStep);
+        }
+
+        function showQuizResults() {
+            const isEligible = checkEligibility();
+            
+            if (isEligible) {
+                const content = `
+                    <div class="result-success">
+                        <div class="result-icon">🎉</div>
+                        <h3>Parabéns! Você pode doar sangue!</h3>
+                        <p>Com base nas suas respostas, você atende aos requisitos básicos para doação.</p>
+                        <p><strong>Próximos passos:</strong></p>
+                        <ul style="text-align: left; margin: 1rem 0;">
+                            <li>Escolha um local para doação</li>
+                            <li>Agende seu horário</li>
+                            <li>Leve documento com foto</li>
+                            <li>Não esteja em jejum</li>
+                        </ul>
+                        <button class="btn-primary" onclick="showSchedulingModal()">Agendar Doação</button>
+                        <button class="btn-secondary" onclick="closeModalFunc()" style="margin-left: 1rem;">Fechar</button>
+                    </div>
+                `;
+                showModal(content);
+            } else {
+                const content = `
+                    <div class="result-error">
+                        <div class="result-icon">⚠️</div>
+                        <h3>Você não pode doar no momento</h3>
+                        <p>Com base nas suas respostas, existem alguns impedimentos temporários ou permanentes.</p>
+                        <p><strong>Recomendações:</strong></p>
+                        <ul style="text-align: left; margin: 1rem 0;">
+                            <li>Consulte um médico para orientações</li>
+                            <li>Verifique novamente após 30 dias</li>
+                            <li>Entre em contato conosco para dúvidas</li>
+                        </ul>
+                        <button class="btn-primary" onclick="closeModalFunc()">Entendi</button>
+                    </div>
+                `;
+                showModal(content);
+            }
+        }
+
+        function checkEligibility() {
+            const answers = appState.quizAnswers;
+            
+            if (answers.length < quizQuestions.length) return false;
+            
+            if (answers[0][0] !== '16-69') return false;
+            
+            if (answers[1][0] !== 'over50') return false;
+            
+            if (answers[2][0] !== 'good') return false;
+            
+            return true;
+        }
+
+        // Modal de Mapa
+        // INICIO DA CORRECAO - dados dos locais com fallback
+        const locationsData = {
+            'Hemocentro Recife': {
+                address: 'Rua R. Joaquim Nabuco, 171 - Recife, PE',
+                schedule: 'Segunda a Sexta: 8h às 17h',
+                phone: '(81) 4571-5000',
+                mapUrl: 'https://maps.google.com/?q=Rua+Joaquim+Nabuco+171,Recife,PE'
+            },
+            'Hospital das Clínicas': {
+                address: 'Av. Prof. Moraes Rego, 1235 - Recife, PE',
+                schedule: 'Terça a Sábado: 7h às 16h',
+                phone: '(81) 2661-5000',
+                mapUrl: 'https://maps.google.com/?q=Av+Prof+Moraes+Rego+1235,Recife,PE'
+            },
+            'Hemorio': {
+                address: 'Rua Dom Bôsco, 723 - Centro, Recife - PE',
+                schedule: 'Segunda a Sexta: 7h às 18h',
+                phone: '(81) 2332-8613',
+                mapUrl: 'https://maps.google.com/?q=Rua+Dom+Bôsco+723,Recife,PE'
+            }
+        };
+
+        const defaultLocationData = {
+            address: 'Endereço não encontrado.',
+            schedule: 'Horário não informado.',
+            phone: 'Telefone não informado.',
+            mapUrl: '#'
+        };
+
+        function getLocationData(location) {
+            return locationsData[location] || defaultLocationData;
+        }
+
+        function showMapModal(locationName) {
+            const locationData = getLocationData(locationName);
+            const scheduleButton = locationsData[locationName] ?
+                `<button class="btn-secondary" onclick="appState.selectedLocation='${locationName}'; showSchedulingModal();">Agendar neste local</button>` :
+                '';
+            
+            const content = `
+                <h2>🗺️ ${locationName}</h2>
+                <p><strong>Endereço:</strong> ${locationData.address}</p>
+                <p><strong>Horário:</strong> ${locationData.schedule}</p>
+                <div style="background: #f3f4f6; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+                    <p>📞 <strong>Telefone:</strong> ${locationData.phone}</p>
+                </div>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <button class="btn-primary" onclick="window.open('${locationData.mapUrl}', '_blank')" ${locationData.mapUrl === '#' ? 'disabled' : ''}>Abrir no Google Maps</button>
+                    ${scheduleButton}
+                </div>
+            `;
+            showModal(content);
+        }
+
+        function getAddressByLocation(location) {
+            return getLocationData(location).address;
+        }
+
+        function getScheduleByLocation(location) {
+            return getLocationData(location).schedule;
+        }
+
+        function getPhoneByLocation(location) {
+            return getLocationData(location).phone;
+        }
+        // FIM DA CORRECAO - dados dos locais com fallback
+
+        // Modal de Informações
+        function showInfoModal() {
+            const content = `
+                <h2>ℹ️ Sobre a Doação de Sangue</h2>
+                <div style="max-height: 400px; overflow-y: auto;">
+                    <h3>📊 Estatísticas Importantes</h3>
+                    <ul>
+                        <li>1 doação salva até 4 vidas</li>
+                        <li>O sangue não tem substituto</li>
+                        <li>42% da população pode doar, mas apenas 1,6% doa</li>
+                    </ul>
+                    
+                    <h3>⏱️ Tempo de Doação</h3>
+                    <ul>
+                        <li><strong>Cadastro:</strong> 5-10 minutos</li>
+                        <li><strong>Triagem:</strong> 10-15 minutos</li>
+                        <li><strong>Doação:</strong> 10-15 minutos</li>
+                        <li><strong>Lanche:</strong> 10-15 minutos</li>
+                    </ul>
+                    
+                    <h3>🩸 O que acontece após a doação?</h3>
+                    <ul>
+                        <li>Plasma é reposto em 24 horas</li>
+                        <li>Plaquetas em 3 dias</li>
+                        <li>Hemácias em 4-6 semanas</li>
+                    </ul>
+                    
+                    <h3>❌ Impedimentos Temporários</h3>
+                    <ul>
+                        <li>Gripe/resfriado (aguardar 7 dias)</li>
+                        <li>Gravidez (6 meses após parto)</li>
+                        <li>Amamentação (até 12 meses)</li>
+                        <li>Tatuagem (12 meses)</li>
+                        <li>Cirurgia (6-12 meses)</li>
+                    </ul>
+                </div>
+                <button class="btn-primary" onclick="closeModalFunc()" style="margin-top: 1rem;">Fechar</button>
+            `;
+            showModal(content);
+        }
+
+        // Formulário de Contato
+        // INICIO DA CORRECAO - validacao do contato
+        const CONTACT_FIELD_LIMITS = {
+            name: 80,
+            email: 120,
+            phone: 11,
+            message: 500
+        };
+        const CONTACT_NAME_PATTERN = /^[A-Za-zÀ-ÖØ-öø-ÿ]+(?:\s+[A-Za-zÀ-ÖØ-öø-ÿ]+)*$/;
+        const CONTACT_EMAIL_PATTERN = /^[A-Za-z0-9._-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+        const CONTACT_PHONE_PATTERN = /^[0-9]{2}9[0-9]{8}$/;
+
+        function setupContactFieldRestrictions() {
+            const contactName = document.getElementById('contactName');
+            const contactEmail = document.getElementById('contactEmail');
+            const contactPhone = document.getElementById('contactPhone');
+            const contactMessage = document.getElementById('contactMessage');
+
+            if (contactName) {
+                contactName.addEventListener('input', () => {
+                    contactName.value = contactName.value
+                        .replace(/[^A-Za-zÀ-ÖØ-öø-ÿ\s]/g, '')
+                        .replace(/\s{2,}/g, ' ')
+                        .slice(0, CONTACT_FIELD_LIMITS.name);
+                });
+            }
+
+            if (contactEmail) {
+                contactEmail.addEventListener('input', () => {
+                    let sanitizedEmail = contactEmail.value
+                        .replace(/[^A-Za-z0-9@._-]/g, '')
+                        .slice(0, CONTACT_FIELD_LIMITS.email);
+                    const firstAt = sanitizedEmail.indexOf('@');
+
+                    if (firstAt !== -1) {
+                        sanitizedEmail = sanitizedEmail.slice(0, firstAt + 1) + sanitizedEmail.slice(firstAt + 1).replace(/@/g, '');
+                    }
+
+                    contactEmail.value = sanitizedEmail;
+                });
+            }
+
+            if (contactPhone) {
+                contactPhone.addEventListener('input', () => {
+                    contactPhone.value = contactPhone.value
+                        .replace(/\D/g, '')
+                        .slice(0, CONTACT_FIELD_LIMITS.phone);
+                });
+            }
+
+            if (contactMessage) {
+                contactMessage.addEventListener('input', () => {
+                    contactMessage.value = contactMessage.value.slice(0, CONTACT_FIELD_LIMITS.message);
+                });
+            }
+        }
+
+        function validateContactForm(form) {
+            const contactName = form.querySelector('#contactName');
+            const contactEmail = form.querySelector('#contactEmail');
+            const contactPhone = form.querySelector('#contactPhone');
+            const contactMessage = form.querySelector('#contactMessage');
+            const name = (contactName?.value || '').trim().replace(/\s{2,}/g, ' ');
+            const email = (contactEmail?.value || '').trim();
+            const phone = (contactPhone?.value || '').replace(/\D/g, '');
+            const message = (contactMessage?.value || '').trim();
+
+            if (contactName) contactName.value = name;
+            if (contactEmail) contactEmail.value = email;
+            if (contactPhone) contactPhone.value = phone;
+            if (contactMessage) contactMessage.value = message;
+
+            if (name.length < 3 || !CONTACT_NAME_PATTERN.test(name)) {
+                return 'Informe um nome valido usando apenas letras.';
+            }
+
+            if (!CONTACT_EMAIL_PATTERN.test(email)) {
+                return 'Informe um email valido sem caracteres especiais fora do padrao.';
+            }
+
+            if (phone && !CONTACT_PHONE_PATTERN.test(phone)) {
+                return 'Informe um celular com DDD, iniciando com 9. Exemplo: 81999999999.';
+            }
+
+            if (message.length < 10) {
+                return 'A mensagem deve ter pelo menos 10 caracteres.';
+            }
+
+            if (message.length > CONTACT_FIELD_LIMITS.message) {
+                return 'A mensagem deve ter no maximo 500 caracteres.';
+            }
+
+            return '';
+        }
+        // FIM DA CORRECAO - validacao do contato
+
+        function handleContactSubmit(e) {
+            e.preventDefault();
+            
+            const form = e.target;
+            const validationError = validateContactForm(form);
+
+            if (validationError) {
+                alert(validationError);
+                return;
+            }
+
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            
+            // Simular envio
+            submitBtn.innerHTML = '<span class="loading"></span> Enviando...';
+            submitBtn.disabled = true;
+            
+            setTimeout(() => {
+                submitBtn.innerHTML = '✓ Mensagem Enviada!';
+                submitBtn.style.background = '#16a34a';
+                
+                setTimeout(() => {
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                    submitBtn.style.background = '';
+                    form.reset();
+                }, 3000);
+            }, 1500);
+        }
+
+        // Event Listeners
+        closeModal.addEventListener('click', closeModalFunc);
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModalFunc();
+            }
+        });
+
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', function() {
+            authSystem.init();
+            setupContactFieldRestrictions();
+        });
+    </script>
+</body>
+</html>
